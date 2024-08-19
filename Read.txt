@@ -56,6 +56,14 @@ docker rm <container_id_or_name>
 docker stop <container_id_or_name> && docker rm <container_id_or_name> # If the container is still running and you want to stop and delete it:
 docker rm -f <container_id_or_name> #To forcefully remove a running container without stopping it:
 
+___________________________________________________________________________________
+ For two terminal need this *
+Check Environment Variables Ensure that CUDA paths are correctly set in your environment variables. You should have the following lines in your ~/.bashrc or equivalent file:
+  export PATH=/usr/local/cuda/bin:$PATH
+  export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+After editing, reload the environment:
+  source ~/.bashrc
+
 
 
 
