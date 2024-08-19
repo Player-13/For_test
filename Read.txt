@@ -1,0 +1,63 @@
+(New Terminal*)
+1.sudo docker run -it --rm \
+  --ipc=host \
+  --runtime=nvidia \
+  --device /dev/video0 \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  ultralytics/ultralytics:latest-jetson-jetpack4
+# Start new docker with access Nvidia cuda and webcam access 
+
+2.apt-get upgrade # Upgrade dependencies on docker
+
+3.apt-get install -y xauth x11-apps or apt-get install -y x11-apps  # Use for install x11 to display results 
+
+4.xclock or xeyes # Test display is on monitor
+
+5.ls /dev/video* # Check the webcam is connected 
+
+6.Check CUDA in docker by code 
+_______________________
+import torch
+# Check if CUDA is available
+if torch.cuda.is_available():
+    print("CUDA is available!")
+    print(f"Number of GPUs: {torch.cuda.device_count()}")
+________________________
+7.Check torchvision in docker by code
+________________________
+import torchvision
+print(torchvifion.__version__)
+________________________
+
+(New Terminal*)
+1.xhost +local:docker # For make host is access for docker
+2.ls /dev/video* # Check the webcam is connected 
+___________________________________________________________________________________
+ To upload file to docker use code *
+docker cp [local_file_path] [container_id]:[container_path]
+Example: 
+user@User:~/Downloads/Pytorch/Model$ docker cp /Downloads/Pytorch/Model/yolov8n.pt d2da33c415fe:/ultralytics
+
+ To download file to host from docker use code *
+docker cp <container_id_or_name>:/path/in/container /path/on/host
+Example: 
+docker cp d2da33c415fe:/ultralytics/output.txt /home/user/Downloads/
+___________________________________________________________________________________
+ To check which  docker is still running use code *
+sudo docker ps # Check which one is still running 
+docker attach <container_id_or_name> # To continues docker where is still running
+or
+docker exec -it <container_id_or_name> /bin/bash # To continues docker where is still running
+___________________________________________________________________________________
+ To delete (or remove) a stopped container *
+docker rm <container_id_or_name>
+docker stop <container_id_or_name> && docker rm <container_id_or_name> # If the container is still running and you want to stop and delete it:
+docker rm -f <container_id_or_name> #To forcefully remove a running container without stopping it:
+
+
+
+
+
+
+
