@@ -29,6 +29,7 @@ ________________________
 import torchvision
 print(torchvifion.__version__)
 ________________________
+8.apt-get install nano # To edit text in file
 
 (New Terminal*)
 1.xhost +local:docker # For make host is access for docker
