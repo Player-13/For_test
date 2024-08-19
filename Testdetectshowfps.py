@@ -34,13 +34,13 @@ while True:
         for box in result.boxes:
             # Extract bounding box coordinates
             x1, y1, x2, y2 = box.xyxy[0].int().tolist()
-            label = box.label
-            confidence = box.conf
+            confidence = box.conf[0].item()
+            class_id = int(box.cls[0].item())
 
             # Draw the bounding box
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             # Draw the label and confidence score
-            cv2.putText(frame, f"{label} {confidence:.2f}", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+            cv2.putText(frame, f"Class {class_id} {confidence:.2f}", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
     # Calculate FPS
     frame_count += 1
